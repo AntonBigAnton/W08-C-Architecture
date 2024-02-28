@@ -27,8 +27,8 @@ unsigned long getBasePointer() {
 }
 
 unsigned long getReturnAddress() {
-    unsigned long *address = __builtin_return_address(0);
-    return &address;
+    unsigned long address = __builtin_return_address(0);
+    return address;
 }
 
 void printStackFrameData(unsigned long basePointer, unsigned long previousBasePointer) {
