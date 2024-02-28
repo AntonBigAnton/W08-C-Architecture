@@ -8,7 +8,7 @@ factorial: # Name for place in program: factorial function
 	pushq	%rbp # Push the base pointer (rbp) to the stack
 	.cfi_def_cfa_offset 16
 	.cfi_offset 6, -16
-	movq	%rsp, %rbp # Set the base pointer (rbp) to the stack pointer (rsp) 
+	movq	%rsp, %rbp # Set the base pointer (rbp) to the stack pointer (rsp)
 	.cfi_def_cfa_register 6
 	subq	$16, %rsp # Decrement the stack pointer (rsp) by 16, and store the result in the stack pointer (rsp): this moves the stack pointer down, to reserve space in the stack
 	# Save the function's parameters
@@ -56,49 +56,50 @@ factorial: # Name for place in program: factorial function
 executeFactorial: # Name for place in program: executeFactorial function
 .LFB1:
 	.cfi_startproc
-	pushq	%rbp #
+	# Create a new stackframe with pushq, movq and subq
+	pushq	%rbp # Push the base pointer (rbp) to the stack
 	.cfi_def_cfa_offset 16
 	.cfi_offset 6, -16
-	movq	%rsp, %rbp #
+	movq	%rsp, %rbp # Set the base pointer (rbp) to the stack pointer (rsp)
 	.cfi_def_cfa_register 6
-	subq	$48, %rsp #
-	movl	$0, %eax #
-	call	getBasePointer #
-	movq	%rax, -8(%rbp) #
-	movq	-8(%rbp), %rax #
-	movq	%rax, %rsi #
-	movl	$.LC0, %edi #
-	movl	$0, %eax #
-	call	printf #
-	movl	$0, %eax #
-	call	getReturnAddress #
-	movq	%rax, -16(%rbp) #
-	movq	-16(%rbp), %rax #
-	movq	%rax, %rsi #
-	movl	$.LC1, %edi #
-	movl	$0, %eax #
-	call	printf #
-	movl	$.LC2, %edi #
-	call	puts #
-	movq	$0, -24(%rbp) #
-	movq	$6, -32(%rbp) #
-	movq	$1, -40(%rbp) #
-	movq	-40(%rbp), %rdx #
-	movq	-32(%rbp), %rax #
-	movq	%rdx, %rsi #
-	movq	%rax, %rdi #
-	call	factorial #
-	movq	%rax, -24(%rbp) #
-	movq	-24(%rbp), %rdx #
-	movq	-32(%rbp), %rax #
-	movq	%rax, %rsi #
-	movl	$.LC3, %edi #
-	movl	$0, %eax #
-	call	printf #
-	nop #
-	leave #
+	subq	$48, %rsp # Decrement the stack pointer (rsp) by 48, and store the result in the stack pointer (rsp): this moves the stack pointer down, to reserve space in the stack
+	movl	$0, %eax # Store the value 0 to the low 32-bits addressable eax: this will "clear" the return register (rax)
+	call	getBasePointer # Transfers control to the getBasePointer function
+	movq	%rax, -8(%rbp) # Save the value returned by the getBasePointer function to the stack, at position -8 (relative to the base pointer rbp)
+	movq	-8(%rbp), %rax # Copy the value back to the return register (rax)
+	movq	%rax, %rsi # Copy the value in the return register (rax) to the 2nd parameter register (rsi)
+	movl	$.LC0, %edi # Store the string in .LC0 to the low 32-bits addressable edi: this will change the value of the 1st parameter register (rdi)
+	movl	$0, %eax # Store the value 0 to the low 32-bits addressable eax: this will "clear" the return register (rax)
+	call	printf # Transfers control to the printf function, but with updated parameters
+	movl	$0, %eax # Store the value 0 to the low 32-bits addressable eax: this will "clear" the return register (rax)
+	call	getReturnAddress # Transfers control to the getReturnAddress function
+	movq	%rax, -16(%rbp) # Save the value returned by the getReturnAddress function to the stack, at position -16 (relative to the base pointer rbp)
+	movq	-16(%rbp), %rax # Copy the value back to the return register (rax)
+	movq	%rax, %rsi # Copy the value in the return register (rax) to the 2nd parameter register (rsi)
+	movl	$.LC1, %edi # Store the string in .LC1 to the low 32-bits addressable edi: this will change the value of the 1st parameter register (rdi)
+	movl	$0, %eax # Store the value 0 to the low 32-bits addressable eax: this will "clear" the return register (rax)
+	call	printf # Transfers control to the printf function, but with updated parameters
+	movl	$.LC2, %edi # Store the string in .LC3 to the low 32-bits addressable edi: this will change the value of the 1st parameter register (rdi)
+	call	puts # Transfers control to the puts function, but with updated parameters
+	movq	$0, -24(%rbp) # Store the value 0 (variable result) to the stack, at position -24 (relative to the base pointer rbp)
+	movq	$6, -32(%rbp) # Store the value 6 (variable number) to the stack, at position -32 (relative to the base pointer rbp)
+	movq	$1, -40(%rbp) # Store the value 1 (variable accumulator) to the stack, at position -40 (relative to the base pointer rbp)
+	movq	-40(%rbp), %rdx # Set the rdx register to accumulator (stored at position -40 relative to the base pointer rbp)
+	movq	-32(%rbp), %rax # Set the return register to number (stored at position -32 relative to the base pointer rbp)
+	movq	%rdx, %rsi # Set the 2nd parameter register (rsi) to accumulator (stored in the rdx register)
+	movq	%rax, %rdi # Set the 1st parameter register (rdi) to number (stored in the rdx register)
+	call	factorial # Transfers control to the factorial function, but with updated parameters
+	movq	%rax, -24(%rbp) # Store the value returned by the factorial function (in the return register rax) in the variable result (stored at position -24 relative to the base pointer rbp)
+	movq	-24(%rbp), %rdx # Set the rdx register to result (stored at position -24 relative to the base pointer rbp)
+	movq	-32(%rbp), %rax # Set the return register to number (stored at position -32 relative to the base pointer rbp)
+	movq	%rax, %rsi # Copy the value in the return register (rax) to the 2nd parameter register (rsi)
+	movl	$.LC3, %edi # Store the string in .LC3 to the low 32-bits addressable edi: this will change the value of the 1st parameter register (rdi)
+	movl	$0, %eax # Store the value 0 to the low 32-bits addressable eax: this will "clear" the return register (rax)
+	call	printf # Transfers control to the printf function, but with updated parameters
+	nop # "No Operation": a machine instruction that is still exectuted but does nothing
+	leave # Restore the values of the base pointer (rbp) and the stack pointer (rsp) at the end of the function: it "clears" the stackframe
 	.cfi_def_cfa 7, 8
-	ret #
+	ret # Return the value stored in the return register (rax)
 	.cfi_endproc
 .LFE1:
 	.size	executeFactorial, .-executeFactorial
