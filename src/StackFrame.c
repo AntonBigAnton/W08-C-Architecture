@@ -28,8 +28,8 @@ unsigned long getBasePointer() {
 
 unsigned long getReturnAddress() {
     unsigned long address;
-    asm volatile ("pop %%rsp;"
-        "movq %%rsp, %0": "=r"(address));
+    asm volatile ("pop %%esp;"
+        "mov %%esp, %0": "=r"(address));
     return address;
 }
 
