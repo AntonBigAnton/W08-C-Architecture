@@ -22,13 +22,15 @@
 
 unsigned long getBasePointer() {
     unsigned long base;
-    asm("movq %%rbp, %0;" : "=r"(base));
+    asm("movq %%rbp, %0" : "=r"(base));
     return base;
 }
 
 unsigned long getReturnAddress() {
     unsigned long address;
-    asm("movq %%rsp, %0;" : "=r"(address));
+    asm("call getReturnAddress"
+        "movq %%eax, %0"
+        : "=r"(address));
     return address;
 }
 
