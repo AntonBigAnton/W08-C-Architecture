@@ -27,9 +27,7 @@ unsigned long getBasePointer() {
 }
 
 unsigned long getReturnAddress() {
-    unsigned long address;
-    asm("movq %%rip, %0;" : "=r"(address));
-    return address;
+    return &__builtin_return_address(0);
 }
 
 void printStackFrameData(unsigned long basePointer, unsigned long previousBasePointer) {
