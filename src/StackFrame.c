@@ -21,7 +21,9 @@
  */
 
 unsigned long getBasePointer() {
-    return 0;
+    unsigned long base;
+    asm("movq %%rbp, %0;" : "=r"(base));
+    return base;
 }
 
 unsigned long getReturnAddress() {
