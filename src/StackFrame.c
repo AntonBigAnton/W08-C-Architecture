@@ -61,11 +61,10 @@ void printStackFrameData(unsigned long basePointer, unsigned long previousBasePo
 
 void printStackFrames(int number) {
     unsigned long basePointer = getBasePointer();
-    unsigned long previousBasePointer;
-    asm("movq 0(%%rbp), %0;" : "=r"(previousBasePointer));
     for (int i = 0; i <= number; i++) {
+        unsigned long previousBasePointer;
+        asm("movq 0(%1), %0;" : "=r"(previousBasePointer) : "r"(basePointer));
         printStackFrameData(basePointer, previousBasePointer);
         basePointer = previousBasePointer;
-        asm("movq 0(%%rbp), %0;" : "=r"(previousBasePointer));
     }
 }
