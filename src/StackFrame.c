@@ -41,9 +41,9 @@ void printStackFrameData(unsigned long basePointer, unsigned long previousBasePo
         sprintf(base, "%016lx", basePointer+j);
 
         char address[17];
-        unsigned long memory;
-        asm("movq 0(%1), %0;" : "=r"(memory) : "r"(basePointer+j));
-        sprintf(address, "%016lx", memory);
+        unsigned long value;
+        asm("movq 0(%1), %0;" : "=r"(value) : "r"(basePointer+j));
+        sprintf(address, "%016lx", value);
         
         printf("%s: %s  --  ", base, address);
         for (int i = 15; i > 0; i-=2) {
