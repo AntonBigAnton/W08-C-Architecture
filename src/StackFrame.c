@@ -22,7 +22,7 @@
 
 unsigned long getBasePointer() {
     unsigned long base;
-    asm("movq %%rbp, %0;" : "=r"(base));
+    asm("movq 0(%%rbp), %0;" : "=r"(base));
     return base;
 }
 
@@ -37,9 +37,9 @@ void printStackFrameData(unsigned long basePointer, unsigned long previousBasePo
     char address[17];
     sprintf(base, "%016lx", basePointer);
     unsigned long memory;
-    asm("movq %1, %0;" : "=r"(memory) : "=r"(basePointer));
+    asm("movq 0(%1), %0;" : "=r"(memory) : "r"(basePointer));
     sprintf(address, "%016lx", memory);
-    printf("%s: %s  --  ", address, base);
+    printf("%s: %s  --  ", base, address);
     for (int i = 15; i > 0; i-=2) {
         printf("%c%c    ", base[i], base[i-1]);
     }
