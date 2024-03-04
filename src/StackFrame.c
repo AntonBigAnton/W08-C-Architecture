@@ -28,12 +28,30 @@ unsigned long getBasePointer() {
 
 unsigned long getReturnAddress() {
     unsigned long address;
-    asm("leaq (%%rip), %0;" : "=r"(address));
+    asm("movq 8(%%rbp), %0;" : "=r"(address));
     return address;
 }
 
 void printStackFrameData(unsigned long basePointer, unsigned long previousBasePointer) {
+    char base[17];
+    char address[17];
+    sprintf(base, "%016lx", basePointer);
+    unsigned long memory;
+    asm("movq %1, %0;" : "=r"(memory) : "=r"(basePointer));
+    sprintf(address, "%016lx", memory);
+    printf("%s: %s  --  ", address, base);
+    for (int i = 15; i > 0; i-=2) {
+        printf("%c%c    ", base[i], base[i-1]);
+    }
+    printf("\n");
 }
 
 void printStackFrames(int number) {
+    unsigned long basePointer = getBasePointer();
+    unsigned long previousBasePointer;
+    asm("movq 0(%%rbp), %0;" : "=r"(previousBasePointer));
+    for (int i = 0; i < number; i++) {
+        printStackFrameData(basePointer, previousBasePointer);
+        printf("-------------\n");
+    }
 }
