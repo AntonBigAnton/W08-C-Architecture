@@ -35,25 +35,37 @@ unsigned long getReturnAddress() {
 }
 
 void printStackFrameData(unsigned long basePointer, unsigned long previousBasePointer) {
-    char base[17];
-    char address[17];
-    sprintf(base, "%016lx", basePointer);
-    unsigned long memory;
-    asm("movq 0(%1), %0;" : "=r"(memory) : "r"(basePointer));
-    sprintf(address, "%016lx", memory);
-    printf("%s: %s  --  ", base, address);
-    for (int i = 15; i > 0; i-=2) {
-        printf("%c%c    ", base[i], base[i-1]);
+    unsigned long frameSize = previousBasePointer - basePointer;
+    for (unsigned long j = 0; j < frameSize; j+=8) {
+        char base[17];
+        sprintf(base, "%016lx", basePointer+j);
+
+        char address[17];
+        unsigned long memory;
+        asm("movq 0(%1), %0;" : "=r"(memory) : "r"(basePointer+j));
+        sprintf(address, "%016lx", memory);
+        
+        printf("%s: %s  --  ", base, address);
+        for (int i = 15; i > 0; i-=2) {
+            printf("%c%c    ", base[i], base[i-1]);
+        }
+        printf("\n");
+        
+        asm("movq 0(%%rbp), %0;" : "=r"(previousBasePointer));
+        
+        if (j == 0) {
+            printf("-------------\n");
+        }
     }
-    printf("\n");
 }
 
 void printStackFrames(int number) {
     unsigned long basePointer = getBasePointer();
     unsigned long previousBasePointer;
     asm("movq 0(%%rbp), %0;" : "=r"(previousBasePointer));
-    for (int i = 0; i < number; i++) {
+    for (int i = 0; i <= number; i++) {
         printStackFrameData(basePointer, previousBasePointer);
-        printf("-------------\n");
+        basePointer = previousBasePointer;
+        asm("movq 0(%%rbp), %0;" : "=r"(previousBasePointer));
     }
 }
