@@ -16,13 +16,13 @@
  *
  */
 
-static unsigned long factorialTest(unsigned long default, unsigned long n, unsigned long accumulator) {
+static unsigned long factorialTest(unsigned long default_value, unsigned long n, unsigned long accumulator) {
 
     if (n <= 1) {
-        printStackFrames(default + 1);
+        printStackFrames(default_value + 1);
         return accumulator;
     }
-    return factorialTest(default, n - 1, n * accumulator);
+    return factorialTest(default_value, n - 1, n * accumulator);
 }
 
 /*
@@ -31,7 +31,7 @@ static unsigned long factorialTest(unsigned long default, unsigned long n, unsig
  *
  */
 
-static void executeFactorialTest(unsigned long default) {
+static void executeFactorialTest(unsigned long default_value) {
     unsigned long basePointer = getBasePointer();
     printf("executeFactorial: basePointer = %lx\n", basePointer);
 
@@ -41,9 +41,9 @@ static void executeFactorialTest(unsigned long default) {
     printf("executeFactorial: about to call factorial which should print the stack\n\n");
 
     unsigned long result = 0l;
-    unsigned long number = default;
+    unsigned long number = default_value;
     unsigned long accumulator = 1l;
-    result = factorialTest(default, number, accumulator);
+    result = factorialTest(default_value, number, accumulator);
     printf("executeFactorial: factorial(%lu) = %lu\n", number, result);
 }
 
