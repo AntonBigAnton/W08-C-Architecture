@@ -21,7 +21,7 @@ int main() {
     // Testing for larger value of n (n = 10)
     printf("\n-- 1. Testing for larger value of n (n = 10) --\n");
     
-    unsigned long DEFAULT_VALUE_OF_N = 10l;
+    #define DEFAULT_VALUE_OF_N 10l
     executeFactorial();
 
     // Testing for smaller value of n (n = 3)
