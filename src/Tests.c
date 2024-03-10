@@ -19,15 +19,15 @@ int main() {
 
     // Testing for larger value of n (n = 10)
     printf("\n1. Testing for larger value of n (n = 10)\n");
-    executeFactorial(10l);
+    executeFactorialTest(10l);
 
     // Testing for smaller value of n (n = 3)
     printf("\n2. Testing for smaller value of n (n = 3)\n");
-    executeFactorial(3l);
+    executeFactorialTest(3l);
 
     // Testing for special value of n (n = 0)
     printf("\n3. Testing for special value of n (n = 0)\n");
-    executeFactorial(0l);
+    executeFactorialTest(0l);
 
     return 0;
 }
