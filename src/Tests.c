@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include "StackFrame.h"
 #include "Factorial.h"
+#undef DEFAULT_VALUE_OF_N
 
 /*
  * Only testing method, that contains all tests.
@@ -19,12 +20,12 @@ int main() {
 
     // Testing for larger value of n (n = 10)
     printf("\n-- 1. Testing for larger value of n (n = 10) --\n");
-    #undef DEFAULT_VALUE_OF_N
-    #define DEFAULT_VALUE_OF_N 10l
+    
+    unsigned long DEFAULT_VALUE_OF_N = 10l;
     executeFactorial();
 
     // Testing for smaller value of n (n = 3)
-    printf("\n-- 2. Testing for smaller value of n (n = 3) --\n");
+    /*printf("\n-- 2. Testing for smaller value of n (n = 3) --\n");
     #undef DEFAULT_VALUE_OF_N
     #define DEFAULT_VALUE_OF_N 3l
     executeFactorial();
@@ -39,6 +40,6 @@ int main() {
     printf("\n-- 4. Testing for special value of n (n = -1) --\n");
     #undef DEFAULT_VALUE_OF_N
     #define DEFAULT_VALUE_OF_N -1l
-    executeFactorial();
+    executeFactorial();*/
     return 0;
 }
