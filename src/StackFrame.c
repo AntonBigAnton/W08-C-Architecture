@@ -41,7 +41,7 @@ void printStackFrameData(unsigned long basePointer, unsigned long previousBasePo
     // Calculate the size of the stack frame
     unsigned long frameSize = previousBasePointer - basePointer;
     // Loop for every multiple of 8 in the stack frame size (the difference in bits)
-    for (unsigned long j = 0; j < frameSize; j+=8) {
+    for (unsigned long j = 0; j < frameSize; j+=BYTES_PER_LINE) {
         // Format the base pointer
         char base[17];
         sprintf(base, "%016lx", basePointer+j);
