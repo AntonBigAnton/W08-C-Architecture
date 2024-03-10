@@ -16,8 +16,8 @@ TryStackFrames: TryStackFrames.o Factorial.o StackFrame.o
 %.s: %.c
 	$(CC) $(GFLAGS) -S -o $@ $<
 
-Tests: Tests.o TestFunctions.o StackFrame.o
-	$(CC) $(GFLAGS) -o Tests Tests.o TestFunctions.o StackFrame.o
+Tests: Tests.o StackFrame.o
+	$(CC) $(GFLAGS) -o Tests Tests.o StackFrame.o
 
 # Targets to clean up your file space
 
