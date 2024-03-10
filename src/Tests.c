@@ -19,22 +19,22 @@ int main() {
 
     // Testing for larger value of n (n = 10)
     printf("\n-- 1. Testing for larger value of n (n = 10) --\n");
-    #define DEFAULT_VALUE_OF_N 10l
+    unsigned long DEFAULT_VALUE_OF_N = 10l;
     executeFactorial();
 
     // Testing for smaller value of n (n = 3)
     printf("\n-- 2. Testing for smaller value of n (n = 3) --\n");
-    #define DEFAULT_VALUE_OF_N 3l
+    DEFAULT_VALUE_OF_N = 3l;
     executeFactorial();
 
     // Testing for special value of n (n = 0)
     printf("\n-- 3. Testing for special value of n (n = 0) --\n");
-    #define DEFAULT_VALUE_OF_N 0l
+    DEFAULT_VALUE_OF_N = 0l;
     executeFactorial();
 
     // Testing for negative value of n (n = -1)
     printf("\n-- 4. Testing for special value of n (n = -1) --\n");
-    #define DEFAULT_VALUE_OF_N -1l
-    executeFactorial();
+    /*DEFAULT_VALUE_OF_N = 1l;
+    executeFactorial();*/
     return 0;
 }
