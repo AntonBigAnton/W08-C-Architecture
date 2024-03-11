@@ -8,7 +8,8 @@
 
 #include <stdio.h>
 #include "StackFrame.h"
-
+#define STR_SIZE 17
+#define ZERO 0
 
 /*
  * Non-static (akin to "public") functions that can be called from anywhere.
@@ -41,12 +42,12 @@ void printStackFrameData(unsigned long basePointer, unsigned long previousBasePo
     // Calculate the size of the stack frame
     unsigned long frameSize = previousBasePointer - basePointer;
     // Loop for every multiple of 8 in the stack frame size (the difference in bits)
-    for (unsigned long j = 0; j < frameSize; j+=BYTES_PER_LINE) {
+    for (unsigned long j = ZERO; j < frameSize; j+=BYTES_PER_LINE) {
         // Format the base pointer
-        char base[17];
+        char base[STR_SIZE];
         sprintf(base, "%016lx", basePointer+j);
 
-        char address[17];
+        char address[STR_SIZE];
         unsigned long value;
         // Get the value stored at the base pointer
         asm("movq 0(%1), %0;" : "=r"(value) : "r"(basePointer+j));
@@ -56,7 +57,7 @@ void printStackFrameData(unsigned long basePointer, unsigned long previousBasePo
         // Print out both hexadecimal numbers in the required format 
         printf("%s: %s  --  ", base, address);
         // Cycle through the address value in reverse order, 2 digits at a time
-        for (int i = 15; i > 0; i-=2) {
+        for (int i = 2*BYTES_PER_LINE-1; i > ZERO; i-=2) {
             printf("%c%c    ", address[i], address[i-1]);
         }
         printf("\n");
@@ -65,7 +66,7 @@ void printStackFrameData(unsigned long basePointer, unsigned long previousBasePo
         asm("movq 0(%%rbp), %0;" : "=r"(previousBasePointer));
         
         // Print out a line of '-' only after the first iteration
-        if (j == 0) {
+        if (j == ZERO) {
             printf("-------------\n");
         }
     }
@@ -74,7 +75,7 @@ void printStackFrameData(unsigned long basePointer, unsigned long previousBasePo
 void printStackFrames(int number) {
     // Initialise the base pointer to the base pointer in the stack frame of the function that called getBasePointer
     unsigned long basePointer = getBasePointer();
-    for (int i = 0; i <= number; i++) {
+    for (int i = ZERO; i <= number; i++) {
         unsigned long previousBasePointer;
         // Set the previousBasePointer to the previous value of basePointer
         asm("movq 0(%1), %0;" : "=r"(previousBasePointer) : "r"(basePointer));
