@@ -22,8 +22,7 @@ make
 ```
 The output should be similar to the following image:  
   
-![Usage Screenshot](https://github.com/AntonBigAnton/W08-C-Architecture/assets/129195559/05596d18-b724-4fac-8832-fbfadd49c235)
-
+![Usage Screenshot](https://github.com/AntonBigAnton/W08-C-Architecture/assets/129195559/ff097548-4573-434c-840b-64ccc110a68a)
 
 ## Testing
 
@@ -35,4 +34,5 @@ make Tests
 ```
 The output should be similar to the following image:  
   
-![Testing Screenshot](https://github.com/AntonBigAnton/W08-C-Architecture/assets/129195559/d0cc3fb5-9570-4d11-817a-91c24f32e97f)
+![Testing Screenshot](https://github.com/AntonBigAnton/W08-C-Architecture/assets/129195559/d88e51b2-a282-4f5e-9f59-126d52306ace)
+
