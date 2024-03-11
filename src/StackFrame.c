@@ -58,7 +58,7 @@ void printStackFrameData(unsigned long basePointer, unsigned long previousBasePo
         printf("%s: %s  --  ", base, address);
         // Cycle through the address value in reverse order, 2 digits at a time
         for (int i = 2*BYTES_PER_LINE-1; i > ZERO; i-=2) {
-            printf("%c%c    ", address[i], address[i-1]);
+            printf("%c%c    ", address[i-1], address[i]);
         }
         printf("\n");
         
