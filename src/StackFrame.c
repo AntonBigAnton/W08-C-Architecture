@@ -73,7 +73,7 @@ void printStackFrameData(unsigned long basePointer, unsigned long previousBasePo
 }
 
 void printStackFrames(int number) {
-    // Initialise the base pointer to the base pointer in the stack frame of the function that called getBasePointer
+    // Initialise the base pointer to the base pointer in the stack frame of printStackFrames
     unsigned long basePointer = getBasePointer();
     for (int i = ZERO; i <= number; i++) {
         unsigned long previousBasePointer;
