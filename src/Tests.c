@@ -7,6 +7,9 @@
 
 #include <stdio.h>
 #include "StackFrame.h"
+#define ZERO 0l
+#define THREE 3l
+#define TEN 10l
 
 /*
  * Static (akin to "private") function to this module.
@@ -57,15 +60,15 @@ int main() {
 
     // Testing for larger value of n (n = 10)
     printf("\n1. Testing for larger value of n (n = 10)\n");
-    executeFactorialTest(10l);
+    executeFactorialTest(TEN);
 
     // Testing for smaller value of n (n = 3)
     printf("\n2. Testing for smaller value of n (n = 3)\n");
-    executeFactorialTest(3l);
+    executeFactorialTest(THREE);
 
     // Testing for special value of n (n = 0)
     printf("\n3. Testing for special value of n (n = 0)\n");
-    executeFactorialTest(0l);
+    executeFactorialTest(ZERO);
 
     return 0;
 }
