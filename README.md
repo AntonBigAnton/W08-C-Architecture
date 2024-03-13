@@ -32,7 +32,7 @@ make clean
 make Tests
 ./Tests
 ```
-The output should be similar to the following image:  
+The output should be similar to the following images:  
   
-![Testing Screenshot](https://github.com/AntonBigAnton/W08-C-Architecture/assets/129195559/d88e51b2-a282-4f5e-9f59-126d52306ace)
-
+![Testing Screenshot](https://github.com/AntonBigAnton/W08-C-Architecture/assets/129195559/ca0d08a9-b90b-49e8-879f-97a8874ac1d2)  
+![Testing Screenshot](https://github.com/AntonBigAnton/W08-C-Architecture/assets/129195559/b2a6b76d-9dd0-4edb-b429-58302c66cbe6)
