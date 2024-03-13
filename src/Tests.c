@@ -127,7 +127,7 @@ void executeFactorialTestZero() {
 }
 
 /*
- * Only testing method, that contains all tests.
+ * Main testing method that runs all tests.
  *
  * @return 0
  */
@@ -136,15 +136,15 @@ int main() {
 
     // Testing for larger value of n (n = 10)
     printf("\n1. Testing for larger value of n (n = 10)\n");
-    executeFactorialTest(TEN);
+    executeFactorialTestTen();
 
     // Testing for smaller value of n (n = 3)
     printf("\n2. Testing for smaller value of n (n = 3)\n");
-    executeFactorialTest(THREE);
+    executeFactorialTestThree();
 
     // Testing for special value of n (n = 0)
     printf("\n3. Testing for special value of n (n = 0)\n");
-    executeFactorialTest(ZERO);
+    executeFactorialTestZero();
 
     return 0;
 }

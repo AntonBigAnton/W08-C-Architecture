@@ -9,9 +9,8 @@
 #define TESTS_H_
 
 /*
- * The numbers to use when computing factorial.
+ * The numbers to use when computing factorial (ZERO is already defined in StackFrame.h).
  */
-#define ZERO 0l
 #define THREE 3l
 #define TEN 10l
 
