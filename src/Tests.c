@@ -7,34 +7,66 @@
 
 #include <stdio.h>
 #include "StackFrame.h"
-#define ZERO 0l
-#define THREE 3l
-#define TEN 10l
+#include "Tests.h"
 
 /*
  * Static (akin to "private") function to this module.
- * This function is only ever called by executeFactorialTest below.
+ * This function is only ever called by executeFactorialTestTen below.
  * When it has reached the final recursive call, it
  * calls printStackFrames() to print out stack frame data.
  *
  */
 
-static unsigned long factorialTest(unsigned long default_value, unsigned long n, unsigned long accumulator) {
+static unsigned long factorialTestTen(unsigned long n, unsigned long accumulator) {
 
     if (n <= 1) {
-        printStackFrames(default_value + 1);
+        printStackFrames(TEN + 1);
         return accumulator;
     }
-    return factorialTest(default_value, n - 1, n * accumulator);
+    return factorialTestTen(n - 1, n * accumulator);
 }
 
 /*
- * Static (akin to "private") function to call factorialTest with set parameter value.
+ * Static (akin to "private") function to this module.
+ * This function is only ever called by executeFactorialTestThree below.
+ * When it has reached the final recursive call, it
+ * calls printStackFrames() to print out stack frame data.
+ *
+ */
+
+static unsigned long factorialTestThree(unsigned long n, unsigned long accumulator) {
+
+    if (n <= 1) {
+        printStackFrames(THREE + 1);
+        return accumulator;
+    }
+    return factorialTestThree(n - 1, n * accumulator);
+}
+
+/*
+ * Static (akin to "private") function to this module.
+ * This function is only ever called by executeFactorialTestZero below.
+ * When it has reached the final recursive call, it
+ * calls printStackFrames() to print out stack frame data.
+ *
+ */
+
+static unsigned long factorialTestZero(unsigned long n, unsigned long accumulator) {
+
+    if (n <= 1) {
+        printStackFrames(ZERO + 1);
+        return accumulator;
+    }
+    return factorialTestZero(n - 1, n * accumulator);
+}
+
+/*
+ * Non-static (akin to "public") function to call factorialTestTen with set parameter value.
  * and print out the result of calling getBasePointer and getReturnAddress.
  *
  */
 
-static void executeFactorialTest(unsigned long default_value) {
+void executeFactorialTestTen() {
     unsigned long basePointer = getBasePointer();
     printf("executeFactorial: basePointer = %lx\n", basePointer);
 
@@ -44,9 +76,53 @@ static void executeFactorialTest(unsigned long default_value) {
     printf("executeFactorial: about to call factorial which should print the stack\n\n");
 
     unsigned long result = 0l;
-    unsigned long number = default_value;
+    unsigned long number = TEN;
     unsigned long accumulator = 1l;
-    result = factorialTest(default_value, number, accumulator);
+    result = factorialTestTen(number, accumulator);
+    printf("executeFactorial: factorial(%lu) = %lu\n", number, result);
+}
+
+/*
+ * Non-static (akin to "public") function to call factorialTestThree with set parameter value.
+ * and print out the result of calling getBasePointer and getReturnAddress.
+ *
+ */
+
+void executeFactorialTestThree() {
+    unsigned long basePointer = getBasePointer();
+    printf("executeFactorial: basePointer = %lx\n", basePointer);
+
+    unsigned long returnAddress = getReturnAddress();
+    printf("executeFactorial: returnAddress = %lx\n", returnAddress);
+
+    printf("executeFactorial: about to call factorial which should print the stack\n\n");
+
+    unsigned long result = 0l;
+    unsigned long number = THREE;
+    unsigned long accumulator = 1l;
+    result = factorialTestThree(number, accumulator);
+    printf("executeFactorial: factorial(%lu) = %lu\n", number, result);
+}
+
+/*
+ * Non-static (akin to "public") function to call factorialTestZero with set parameter value.
+ * and print out the result of calling getBasePointer and getReturnAddress.
+ *
+ */
+
+void executeFactorialTestZero() {
+    unsigned long basePointer = getBasePointer();
+    printf("executeFactorial: basePointer = %lx\n", basePointer);
+
+    unsigned long returnAddress = getReturnAddress();
+    printf("executeFactorial: returnAddress = %lx\n", returnAddress);
+
+    printf("executeFactorial: about to call factorial which should print the stack\n\n");
+
+    unsigned long result = 0l;
+    unsigned long number = ZERO;
+    unsigned long accumulator = 1l;
+    result = factorialTestZero(number, accumulator);
     printf("executeFactorial: factorial(%lu) = %lu\n", number, result);
 }
 
