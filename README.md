@@ -10,7 +10,8 @@ All source files are in the src folder. These are:
 - An x86-64 Assembly file,
 - A Makefile.
   
-My submission also contains a report and this README.md file
+My submission also contains a report and this README.md file.  
+The format of the report has been modified due to the conversion from .docx to .pdf.
 
 ## Usage
 
