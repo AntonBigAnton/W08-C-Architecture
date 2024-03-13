@@ -8,8 +8,6 @@
 
 #include <stdio.h>
 #include "StackFrame.h"
-#define STR_SIZE 17
-#define ZERO 0
 
 /*
  * Non-static (akin to "public") functions that can be called from anywhere.

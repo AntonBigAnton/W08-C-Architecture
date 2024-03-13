@@ -10,6 +10,8 @@
 #define STACKFRAME_H_
 
 #define BYTES_PER_LINE 8
+#define STR_SIZE 17
+#define ZERO 0
 
 /*
  * Gets hold of the base pointer in the stack frame of the function that called getBasePointer
